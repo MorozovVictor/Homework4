@@ -1,27 +1,30 @@
 package com.task3;
 
-import java.util.Scanner;
-
 public class CalculatorParamCmd {
     
     public static void main(String[] args) {
         
-        Scanner scanner = new Scanner(System.in);
+        if (args.length < 2 || args.length > 3) {
+            help();
+        } 
         
-        System.out.print("Введите операцию: ");
-        String operation = scanner.next();
-        
-        if (operation.equals("modulus")) {
-            System.out.print("Введите число: ");
-            int firstOperand = scanner.nextInt();
-                
-            System.out.println(" Abs (" + firstOperand + ") = " + Math.abs(firstOperand));
-        } else {
-            System.out.print("Введите первое число: ");
-            int firstOperand = scanner.nextInt();
-            
-            System.out.print("Введите второе число: ");
-            int secondOperand = scanner.nextInt();
+        if (args.length == 2) {
+            String operation = args[0];
+            int firstOperand = Integer.parseInt(args[1]);     
+
+            switch (operation) {
+                case "modulus": 
+                    System.out.println(" Abs (" + firstOperand + ") = " + Math.abs(firstOperand));
+                    break;
+                default :
+                    System.out.println("Введенная операция не поддерживается");
+                    help();
+            }
+        }
+        if (args.length == 3) {
+            String operation = args[0];
+            int firstOperand = Integer.parseInt(args[1]);
+            int secondOperand = Integer.parseInt(args[2]);
 
             switch (operation) {
                 case "multiplication": 
@@ -46,9 +49,15 @@ public class CalculatorParamCmd {
             }
         }
     }
-    
     public static void help() {
-        System.out.println("Поддерживаемые операции: multiplication, division, addition, subtraction, remainder, modulus");
+        System.out.println("Поддерживаемые операции:");
+        System.out.println("multiplication [firstOperand] [secondOperand]");
+        System.out.println("division [firstOperand] [secondOperand]");
+        System.out.println("addition [firstOperand] [secondOperand]");
+        System.out.println("subtraction [firstOperand] [secondOperand]");
+        System.out.println("remainder [firstOperand] [secondOperand]");
+        System.out.println("modulus [Operand]");
+        System.out.println("--help");
         
         return;
         
